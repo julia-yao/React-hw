@@ -1,23 +1,19 @@
 import{ useState } from 'react';
+import BlogList from './BlogList';
 
 const Home = () => {
     
-    const [name, setName] = useState('Mario');
-    const [age, setAge] = useState('20');
-    //透過第二個參數 傳入新資料
-    const handleClick = () =>{
-        setName('Lucy');
-        setAge('29');
-        
-    }
+    const [blogs, setBlogs] = useState([
+        {title: 'My new website', body:'loredmmv mlmoe dmo...', author:'mario',id:1},
+        {title: 'Welcome party', body:'loredmmv mlmoe dmo...', author:'yoshi',id:2},
+        {title: 'Web dev top tips', body:'loredmmv mlmoe dmo...', author:'wolf',id:3},
+    ]);
 
     
      
     return (   
         <div className="Home">
-            <h2>Homepage</h2>
-            <p>{ name } is {age} years old.</p>
-            <button onClick={handleClick}>click me</button>
+           <BlogList blogs={blogs} title = 'All blogs!' />
            
         </div>
      );
