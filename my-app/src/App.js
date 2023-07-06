@@ -3,14 +3,9 @@ import Navbar from './Navbar';
 import Home from './Home';
 
 
-function App() {
+function App(props) {
   return (
-    <div className="App"> 
-      <Navbar/>
-      <div className='content'>
-        <Home/>
-      </div>
-    </div>
+    <button>{props.children}</button>
   );
 }
 
