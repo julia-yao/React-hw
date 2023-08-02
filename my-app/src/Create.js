@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Create = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('max');
     const [isPending, setisPending] = useState('false');
+    const history =  useHistory();
 
     const handleSubmit = (e)=> {
         e.preventDefault(); //禁止按鈕動作後刷新頁面
@@ -17,8 +19,8 @@ const Create = () => {
             headers: {'Content-Type':'application/json'}, //告訴瀏覽器資料類型
             body: JSON.stringify(blog), 
         }).then(()=>{
-            console.log('new blog added');
-            setisPending(false);
+            history.push('/');
+            
         })
     }
     return ( 
@@ -46,9 +48,8 @@ const Create = () => {
                     <option value="max">max</option>
                     <option value="tsuda">tsuda</option>
                 </select>
-                { !isPending && <button>Add blog</button> }
-                { isPending && <button disabled>Adding blog...</button> }
-                
+                <button>Add blog</button>
+                 
             </form>
         </div>
      );
