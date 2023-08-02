@@ -19,8 +19,9 @@ const Create = () => {
             headers: {'Content-Type':'application/json'}, //告訴瀏覽器資料類型
             body: JSON.stringify(blog), 
         }).then(()=>{
+        
+            setisPending(false);
             history.push('/');
-            
         })
     }
     return ( 
