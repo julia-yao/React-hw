@@ -4,10 +4,27 @@ const Create = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('max');
+    const [isPending, setisPending] = useState('false');
+
+    const handleSubmit = (e)=> {
+        e.preventDefault(); //禁止按鈕動作後刷新頁面
+        const blog = { title, body, author };
+
+        setisPending(true);
+
+        fetch('http://localhost:8000/blogs',{
+            method: 'POST',
+            headers: {'Content-Type':'application/json'}, //告訴瀏覽器資料類型
+            body: JSON.stringify(blog), 
+        }).then(()=>{
+            console.log('new blog added');
+            setisPending(false);
+        })
+    }
     return ( 
         <div className="create">
             <h2>Add a new blog</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>Blog title:</label>
                 <input 
                     type="text" 
@@ -29,10 +46,9 @@ const Create = () => {
                     <option value="max">max</option>
                     <option value="tsuda">tsuda</option>
                 </select>
-                <button>Add blog</button>
-                <p>{ title }</p>
-                <p>{ body }</p>
-                <p>{ author }</p>
+                { !isPending && <button>Add blog</button> }
+                { isPending && <button disabled>Adding blog...</button> }
+                
             </form>
         </div>
      );
